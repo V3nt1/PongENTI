@@ -62,3 +62,10 @@ websocket_server.on("request", function(req){
 	}
 });
 ```
+
+Vamos a ir explicando poco a poco el código de arriba.
+
+Lo primero y más importante, es la lógica de qué hacer al recibir una solicitud de conexión a nuestro servidor (**on("request")**).
+En nuestro caso, lo que queremos es que la primera persona en conectarse se convierta en el jugador 1, que la segunda se convierta en el jugador 2, y que a partir de ese momento, todos los nuevos usuarios que se unan se conviertan en espectadores. Para ello, contamos con 2 variables independientes (conn1, conn2) y un array de espectadores.
+
+A continuación, cada una de estas conexiones tiene su propia funcion **on("message")**, que se llama cada vez que se envian datos desde nuestro index.html para que el resto de jugadores o espectadores estén sincronizados. Nada más recibir la información, lo que hacemos es enviarsela al resto de jugadores con la funcion **send()**.
